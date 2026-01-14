@@ -8,6 +8,14 @@
 - Run a specific test function 
 - `go test ./iteration -run TestSum`
 
+- `t.Fatalf / t.Fatal`
+    - Use t.Fatal when the test cannot continue.
+    - Use t.Errorf when the test can continue.
+
+### errcheck pkg
+- `go install github.com/kisielk/errcheck@latest`
+- `errcheck .`
+
 ### table driven tests
 - to build a list of test cases that can be tested in the same manner
 
@@ -175,4 +183,32 @@ func TestSumAllTails(t *testing.T) {
 
 }
 ```
-# learn-go
+### Stringer
+```go
+type Stringer interface {
+	String() string
+}
+
+```
+- If your type implements this method, Go will automatically use it when printing.
+```go
+func (b Bitcoin) String() string {
+	return fmt.Sprintf("%d BTC", b)
+}
+
+
+fmt.Printf("got %d want %d\n", got, want) //got 10 want 10
+
+fmt.Printf("got %s want %s\n", got, want)
+// or
+fmt.Printf("got %v want %v\n", got, want) //got 10 BTC want 10 BTC
+
+```
+
+### code formatting
+- ` gofmt -w ./`
+
+
+### map
+- accessing a map with a key that is not found returns `0 | "" | nil`
+- `definition, ok := d[word]`

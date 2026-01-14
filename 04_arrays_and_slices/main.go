@@ -1,43 +1,42 @@
 package main
 
-
 func main() {
 	// entry point
 }
-func Sum(numbers []int) (result int ) {
+func Sum(numbers []int) (result int) {
 	result = 0
 	for _, number := range numbers {
-		result+=number
+		result += number
 	}
-	return  
+	return
 }
 func SumAll(numbersToSum ...[]int) []int {
-/* 
-	sums := make([]int, len(numbersToSum))
-	for i, numbers := range numbersToSum {
-		sums[i]=Sum(numbers)
-	}
+	/*
+		sums := make([]int, len(numbersToSum))
+		for i, numbers := range numbersToSum {
+			sums[i]=Sum(numbers)
+		}
 
-	 */
+	*/
 
 	var sums []int
 	for _, numbers := range numbersToSum {
 		sums = append(sums, Sum(numbers))
 	}
-	return  sums
+	return sums
 }
 
 func SumAllTails(numbersToSum ...[]int) []int {
 
 	var sums []int
 	for _, numbers := range numbersToSum {
-		if(len(numbers) == 0) {
+		if len(numbers) == 0 {
 			sums = append(sums, 0)
-		}else {
+		} else {
 
 			tail := numbers[1:]
 			sums = append(sums, Sum(tail))
 		}
 	}
-	return  sums
+	return sums
 }

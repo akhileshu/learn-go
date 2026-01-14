@@ -13,16 +13,15 @@ func TestAdder(t *testing.T) {
 		t.Errorf("expected '%d' but got '%d'", expected, sum)
 	}
 }
+
 /* func ExampleAddInt() {
 	sum := AddInt(1, 5)
 	fmt.Println(sum)
 	// Output: 6
 }
- */
+*/
 
- func ExampleAddInt() {
+func ExampleAddInt() {
 	fmt.Println(AddInt(1, 5))
 	// Output: 6
 }
-
-
