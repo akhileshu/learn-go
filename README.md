@@ -265,3 +265,10 @@ var dictionary = make(map[string]string)
 
 ### defer
 - used to schedule a function call to run just before the surrounding function returns
+
+### Reflect
+- ability of a program to inspect and manipulate its own structure, types, and values at runtime using the standard reflect package
+- type `any` is alias for `interface{}`
+
+### loops
+- `for { ... }` is  an infinite loop until we break

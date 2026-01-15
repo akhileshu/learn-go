@@ -9,7 +9,9 @@ import (
 func main() {
 	// entry point
 }
+
 var tenSecondTimeout = 10 * time.Second
+
 func Racer(a, b string) (string, error) {
 	/*
 		aDuration := measureResponseTime(a)
@@ -20,7 +22,7 @@ func Racer(a, b string) (string, error) {
 		return b, nil
 	*/
 
-return ConfigurableRacer(a, b, tenSecondTimeout)
+	return ConfigurableRacer(a, b, tenSecondTimeout)
 }
 
 func ConfigurableRacer(a, b string, timeout time.Duration) (winner string, error error) {
