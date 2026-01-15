@@ -13,7 +13,7 @@ func (dictionary Dictionary) Delete(word string) error {
 	case ErrNotFound:
 		return ErrWordDoesNotExist
 	case nil:
-		 delete(dictionary, word)
+		delete(dictionary, word)
 	default:
 		return err
 	}

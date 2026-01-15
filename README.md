@@ -48,6 +48,11 @@ var (
 ### table driven tests
 - to build a list of test cases that can be tested in the same manner
 
+### mocking
+- https://github.com/golang/mock - mocking framework/pkg
+- Use mocks in tests when the real implementation is slow, expensive, flaky, or has external side effects (APIs, databases, time, network).
+- Mock boundaries, not internals(logic).
+
 ### benchmark()
 ```sh
 # Run all benchmarks in a package
