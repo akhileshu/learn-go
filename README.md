@@ -258,3 +258,10 @@ var dictionary = make(map[string]string)
 // insted of 
 // var m map[string]string
 ```
+
+### select
+- select waits on multiple channel operations and runs the one that is ready first.
+- simply - pick which ever completes first
+
+### defer
+- used to schedule a function call to run just before the surrounding function returns
