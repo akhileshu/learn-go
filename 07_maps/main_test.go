@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"go-playground/package/testing_utils"
+	"testing"
+)
 
 func TestSearch(t *testing.T) {
 	dictionary := Dictionary{"test": "this is just a test"}
@@ -9,27 +12,97 @@ func TestSearch(t *testing.T) {
 		got, _ := dictionary.Search("test")
 		want := "this is just a test"
 
-		assertStrings(t, got, want)
+		testing_utils.AssertStrings(t, got, want)
 	})
 
 	t.Run("unknown word", func(t *testing.T) {
 		_, err := dictionary.Search("unknown")
-		want := "could not find the word you were looking for"
+		want := ErrNotFound.Error()
 
-		if err == nil {
-			t.Fatal("expected to get an error.")
-		}
+		testing_utils.AssertError(t, err, ErrNotFound)
 
-		assertStrings(t, err.Error(), want)
+		testing_utils.AssertStrings(t, err.Error(), want)
 	})
 }
 
-func assertStrings(t testing.TB, got, want string) {
-	t.Helper()
+func TestAdd(t *testing.T) {
+	t.Run("new word", func(t *testing.T) {
+		dictionary := Dictionary{}
+		word := "test"
+		definition := "this is just a test"
 
-	if got != want {
-		t.Errorf("got %q want %q", got, want)
-	}
+		err := dictionary.Add(word, definition)
+
+		testing_utils.AssertError(t, err, nil)
+		assertDefinition(t, dictionary, word, definition)
+	})
+
+	t.Run("existing word", func(t *testing.T) {
+		word := "test"
+		definition := "this is just a test"
+		dictionary := Dictionary{word: definition}
+		err := dictionary.Add(word, "new test")
+
+		testing_utils.AssertError(t, err, ErrWordExists)
+		assertDefinition(t, dictionary, word, definition)
+	})
 }
 
+func TestUpdate(t *testing.T) {
+	t.Run("existing word", func(t *testing.T) {
 
+		word := "test"
+		definition := "this is just a test"
+		dictionary := Dictionary{word: definition}
+		newDefinition := "new definition"
+
+		err := dictionary.Update(word, newDefinition)
+		testing_utils.AssertError(t, err, nil)
+
+		assertDefinition(t, dictionary, word, newDefinition)
+	})
+	t.Run("new word", func(t *testing.T) {
+		word := "test"
+		definition := "this is just a test"
+		dictionary := Dictionary{}
+
+		err := dictionary.Update(word, definition)
+
+		testing_utils.AssertError(t, err, ErrWordDoesNotExist)
+	})
+
+}
+
+func TestDelete(t *testing.T) {
+	t.Run("existing word", func(t *testing.T) {
+		word := "test"
+		dictionary := Dictionary{word: "test definition"}
+
+		err := dictionary.Delete(word)
+
+		testing_utils.AssertError(t, err, nil)
+
+		_, err = dictionary.Search(word)
+
+		testing_utils.AssertError(t, err, ErrNotFound)
+	})
+
+	t.Run("non-existing word", func(t *testing.T) {
+		word := "test"
+		dictionary := Dictionary{}
+
+		err := dictionary.Delete(word)
+
+		testing_utils.AssertError(t, err, ErrWordDoesNotExist)
+	})
+}
+
+func assertDefinition(t testing.TB, dictionary Dictionary, word, definition string) {
+	t.Helper()
+
+	got, err := dictionary.Search(word)
+	if err != nil {
+		t.Fatal("should find added word:", err)
+	}
+	testing_utils.AssertStrings(t, got, definition)
+}

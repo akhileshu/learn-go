@@ -6,17 +6,17 @@ import (
 )
 
 func TestWallet(t *testing.T) {
-	assertError := func(t testing.TB, got ,want error) {
-	t.Helper()
+	assertError := func(t testing.TB, got, want error) {
+		t.Helper()
 
-	if got == nil {
-		t.Fatal("didn't get an error but wanted one")
-	}
+		if got == nil {
+			t.Fatal("didn't get an error but wanted one")
+		}
 
-	if got != want {
-		t.Errorf("got %q, want %q", got, want)
+		if got != want {
+			t.Errorf("got %q, want %q", got, want)
+		}
 	}
-}
 	assertBalance := func(t testing.TB, wallet Wallet, want Bitcoin) {
 		t.Helper()
 		got := wallet.Balance()

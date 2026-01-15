@@ -16,6 +16,35 @@
 - `go install github.com/kisielk/errcheck@latest`
 - `errcheck .`
 
+### error handling
+- Typed error → “this specific thing went wrong”
+```go
+
+const (
+	ErrNotFound   = DictionaryErr("could not find the word you were looking for")
+	ErrWordExists = DictionaryErr("cannot add word because it already exists")
+)
+
+type DictionaryErr string
+
+func (e DictionaryErr) Error() string {
+	return string(e)
+}
+
+// usage
+if errors.Is(err, ErrNotFound) { ... }
+
+```
+vs
+- Sentinel error → “something went wrong”
+
+```go
+var (
+	ErrNotFound   = errors.New("could not find the word you were looking for")
+	ErrWordExists = errors.New("cannot add word because it already exists")
+)
+```
+
 ### table driven tests
 - to build a list of test cases that can be tested in the same manner
 
@@ -212,3 +241,15 @@ fmt.Printf("got %v want %v\n", got, want) //got 10 BTC want 10 BTC
 ### map
 - accessing a map with a key that is not found returns `0 | "" | nil`
 - `definition, ok := d[word]`
+- writing to a nil map will cause a runtime panic
+```go
+//do
+var dictionary = map[string]string{}
+
+// OR
+
+var dictionary = make(map[string]string)
+
+// insted of 
+// var m map[string]string
+```
