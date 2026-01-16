@@ -3,14 +3,19 @@
 
 ### run test
 - When you test a folder, Go runs all _test.go files in that folder.
-- `go test ./hello_world` 
+- `go test ./...` - Run all tests in all sub-packages
+- `go test ./hello_world ./arrays` - Run tests in package(s)
 
-- Run a specific test function 
-- `go test ./iteration -run TestSum`
+
+- `go test ./iteration -run TestSum` - Run a specific test function 
 
 - `t.Fatalf / t.Fatal`
     - Use t.Fatal when the test cannot continue.
     - Use t.Errorf when the test can continue.
+
+### property-based testing
+- Don’t test specific examples.Test truths that must always hold. 
+- ex - `ConvertToArabic(ConvertToRoman(n)) == n`
 
 ### errcheck pkg
 - `go install github.com/kisielk/errcheck@latest`

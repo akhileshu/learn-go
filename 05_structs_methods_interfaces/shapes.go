@@ -20,7 +20,7 @@ type Triangle struct {
 }
 
 func (t Triangle) Area() float64 {
-	return (t.base * t.Height) * 0.4
+	return (t.base * t.Height) * 0.5
 }
 
 type Circle struct {
