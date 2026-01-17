@@ -1,4 +1,4 @@
-package main
+package readingfiles
 
 import (
 	// blogposts "github.com/quii/learn-go-with-tests/reading-files"
@@ -18,8 +18,8 @@ import (
 	"os"
 )
 
-// from from package root 
-// 
+// from from package root
+//
 // learn-go/17_reading_files on main ❯ go run .
 func main() {
 	// entry point

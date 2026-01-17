@@ -1,4 +1,4 @@
-package main
+package readingfiles
 
 import (
 	// blogposts "github.com/quii/learn-go-with-tests/reading-files"

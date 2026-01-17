@@ -1,3 +1,5 @@
+- https://cheatsheets.zip/go
+
 ### about this project
 - this repo implements https://quii.gitbook.io/learn-go-with-tests
 
@@ -277,4 +279,15 @@ var dictionary = make(map[string]string)
 
 ### loops
 - `for { ... }` is  an infinite loop until we break
+
+
+### generics
+
+`comparable` `func AssertEqual[T comparable](t *testing.T, got, want T) {}`
+
+	- is `T any` the same as interface{} ? they are similar but generic(T) offers constraints
+	- GenericFoo("1", 1) will fail
+	- GenericFoo(1, 2) is valid
+
+- https://github.com/XANi/goneric/tree/master
 
